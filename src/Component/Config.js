@@ -1,8 +1,11 @@
 import React from 'react'
+import './assets/css/style.css'
 
 function Config(){
     return(
-        <h1>Section Config</h1>
+        <div className="contener">
+            <h1>Section Config</h1>
+        </div>
     )
 }
 
