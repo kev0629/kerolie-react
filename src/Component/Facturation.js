@@ -1,4 +1,5 @@
 import React from 'react';
+import { Input, Checkbox, Button, Form} from 'semantic-ui-react'
 
 import './assets/css/style.css'
 
