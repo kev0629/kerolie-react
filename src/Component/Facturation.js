@@ -60,7 +60,7 @@ function Facturation(){
                         </Form.Group>
                         <Form.Group>
                             <Form.Input placeholder='Type de prestation' width={7}/>
-                            <Form.Input width={7}s/>
+                            <Form.Input width={7}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Input placeholder='Frais de déplacements' width={14} />
