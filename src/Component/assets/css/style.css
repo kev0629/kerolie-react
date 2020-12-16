@@ -4,3 +4,12 @@
     padding-left: 15%;
     padding-right: 15%;
 }
+
+.checkboxs{
+    align-items: center;
+    justify-content: center;
+}
+
+.centered{
+    text-align: center;
+}
