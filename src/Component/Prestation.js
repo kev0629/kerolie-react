@@ -10,7 +10,7 @@ function Prestation(){
                 <Form.Group widths='equal'>
                     <Form.Input fluid placeholder='Presstation' width={12} />
                     <Form.Input fluid placeholder='Prix' width={4}/>
-                    <Form.Button width={2}>Add</Form.Button>
+                    <Form.Button width={3}>Add</Form.Button>
                 </Form.Group>
             </Form>
             <Table singleLine color='blue' key='blue'>

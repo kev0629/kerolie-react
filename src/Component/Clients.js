@@ -14,7 +14,7 @@ function Clients(){
                 <Form.Group widths='equal'>
                 <Form.Input fluid placeholder='Code postal' width={8} />
                     <Form.Input fluid placeholder='Ville' width={9}/>
-                    <Form.Button width={2}>Add</Form.Button>
+                    <Form.Button width={3}>Add</Form.Button>
                 </Form.Group>
             </Form>
             <Table singleLine color='blue' key='blue'>
