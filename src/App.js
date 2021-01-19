@@ -5,6 +5,7 @@ import Prestation from './Component/Prestation'
 import Config from './Component/Config'
 import Navigation from './Component/Navigation'
 import {BrowserRouter as Router, Route } from 'react-router-dom';
+import "./Component/assets/css/style.css"
 
 function App() {
   return (

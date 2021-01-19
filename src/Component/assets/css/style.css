@@ -1,8 +1,13 @@
+html,body{
+    font-family: 'San Francisco', sans-serif;
+    background-color: #fafafa;
+  }
 .contener{
     margin-top: 100px;
     margin-bottom: 20px;
     padding-left: 15%;
     padding-right: 15%;
+    text-align: center;
 }
 
 .checkboxs{

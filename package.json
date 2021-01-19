@@ -8,6 +8,7 @@
     "cross-env": "6.0.2",
     "electron-is-dev": "1.1.0",
     "electron-log": "^3.0.8",
+    "pretty-checkbox": "^3.0.3",
     "react": "^16.8.6",
     "react-date-picker": "^8.0.5",
     "react-dom": "^16.8.6",

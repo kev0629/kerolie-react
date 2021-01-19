@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { Icon } from 'semantic-ui-react'
 import './assets/css/Navigation.css'
 
 function Navigation(){
@@ -16,7 +15,7 @@ function Navigation(){
             <li>Clients</li>
             </Link>
             <Link to='/Config'>
-            <li> <Icon name='cog' /></li>
+            <li>Réglages</li>
             </Link>
         </ul>
     )

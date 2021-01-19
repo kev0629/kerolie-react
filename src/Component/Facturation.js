@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
-import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
-import {Button, Header, Form, Container, Input, Dropdown} from 'semantic-ui-react'
+import 'pretty-checkbox/src/pretty-checkbox.scss'
 import {
     DateInput,
     TimeInput,
@@ -40,6 +39,18 @@ for (let i = 0; i < 100; i++) {
   nbPresta[i] = {text:i, value:i}
 }
 
+class Checkbox extends React.Component{
+  render(){
+    return(
+      <div className="pretty p-pulse p-default p-curve">
+        <input type="checkbox" name="Devis" id="Devis"/>
+        <div className="state p-primary">
+            <label>Devis</label>
+        </div>
+      </div>
+    )
+  }
+}
 
 class InvoiceForm extends React.Component {
     constructor(props) {
@@ -63,115 +74,25 @@ class InvoiceForm extends React.Component {
   
     render() {
       return (
-        <Form>
-            <Form.Group inline className="checkboxs">
-                <Form.Checkbox label='Devis' />
-                <Form.Checkbox label='Enfant' />
-                <Form.Checkbox label='Organisme' />
-                <Form.Checkbox label='2nd prestation' />
-                <Form.Checkbox label='Déplacement' />
-            </Form.Group>
-            <DateInput
-            name="date"
-            placeholder="Date"
-            value={this.state.date}
-            iconPosition="left"
-            onChange={this.handleChange}
-            />
-            <Form.Checkbox toggle label='Personne enregistré' className='centered' />
-                                <Form.Field
-                                    id='form-button-control-public'
-                                    control={Input}
-                                    placeholder='nom du patient'
-                                    icon='user'
-                                    iconPosition='left'
-                                />
-                                <Form.Field
-                                    id='form-button-control-public'
-                                    control={Input}
-                                    placeholder='Personne à facturer'
-                                    icon='user'
-                                    iconPosition='left'
-                                />
-                                <Form.Field
-                                    id='form-button-control-public'
-                                    control={Input}
-                                    placeholder='Adresse'
-                                    iconPosition='left'
-                                    icon= 'home'
-                                />
-                            <Form.Group widths='equal'>
-                                <Form.Field
-                                    id='form-input-control-first-name'
-                                    control={Input}
-                                    placeholder='Code postal'
-                                    iconPosition='left'
-                                    icon= 'home'
-                                />
-                                <Form.Field
-                                    id='form-input-control-last-name'
-                                    control={Input}
-                                    placeholder='ville'
-                                    iconPosition='left'
-                                    icon= 'home'
-                                />    
-                            </Form.Group>
-                            <Form.Field
-                                    id='form-input-control-last-name'
-                                    control={Input}
-                                    placeholder='Objet'
-                            />
-                            <Header as='h5' className='centered'>Numero de facture</Header>
-                            <Form.Group widths='equal'>
-                            <Form.Field
-                              control={Dropdown}
-                              placeholder='Numéro de facture'
-                              fluid
-                              selection
-                              options={invoiceNumP1}
-                            />
-                            <Form.Field
-                              control={Dropdown}
-                              placeholder='Numéro de facture'
-                              fluid
-                              selection
-                              options={invoiceNumP2}
-                            />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Input placeholder='type de prestation' width={12} />
-                                <Form.Dropdown search placeholder='Nb prestations' selection options={nbPresta} />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Input placeholder='type de prestation' width={12} />
-                                <Form.Dropdown search placeholder='Nb prestations' selection options={nbPresta} />
-                                
-                            </Form.Group>
-                            <Form.Field
-                                id='form-input-control-last-name'
-                                control={Input}
-                                placeholder='Frais de déplacements'
-                                icon='car'
-                                iconPosition='left'
-                            />
-                            <Form.Field
-                            id='form-button-control-public'
-                            control={Button}
-                            content='Facture'
-                            icon='file alternate outline'
-                            color='blue'
-                            className='centered'
-                            />
-        </Form>
+        <>
+        <div className='checkbox-block'>
+          <Checkbox/>
+          <Checkbox/>
+          <Checkbox/>
+          <Checkbox/>
+          <Checkbox/>
+        </div>
+        <input type="date" id="date" value=""></input>
+      </>
       );
     }
   }
 
 function Facturation(){
     return(                 
-            <Container className="contener">
+            <div className="contener">
                 <InvoiceForm/>           
-            </Container>
+            </div>
 
         
     )
