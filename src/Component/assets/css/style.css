@@ -45,7 +45,8 @@ html,body{
 .centered-block{
     display: block;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
+    
 }
  .inline{
     display: inline-block;
@@ -57,7 +58,7 @@ html,body{
     background-color: #f1f1f1;
     border: none;
     width: 50%;
-    height: 36px; 
+    height: 40px; 
     outline: none;
     font-size: 14px !important;
     font-family: 'San Francisco', sans-serif !important;
@@ -69,7 +70,7 @@ html,body{
     background-color: #f1f1f1;
     border: none;
     width: 61%;
-    height: 36px; 
+    height: 40px; 
     outline: none;
     font-size: 14px !important;
     font-family: 'San Francisco', sans-serif !important;
@@ -84,4 +85,8 @@ html,body{
     outline: none;
     font-size: 14px !important;
     font-family: 'San Francisco', sans-serif !important;
+ }
+
+ .center-text{
+     text-align: center;
  }

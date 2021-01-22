@@ -44,6 +44,14 @@ var Patientlist = [{
   "postCode": "06110",
   "city": "LE CANNET",
   "id":3,
+},
+{
+  "parentsName": "Saffioti",
+  "childFirstName": "",
+  "adress": "604 avenue georges pompidou",
+  "postCode": "06110",
+  "city": "LE CANNET",
+  "id":4,
 }]
 
 const prestations = PrestationList.map((PrestationList) =>
@@ -53,6 +61,29 @@ const prestations = PrestationList.map((PrestationList) =>
 const patientSelect = Patientlist.map((Patientlist) =>
 <option key={Patientlist.id} id={Patientlist.id} value={Patientlist.parentsName} >{Patientlist.parentsName}</option>
 );
+
+let d = new Date()
+
+function getTodayDate (d){
+  let todayDate
+  if ((d.getMonth() + 1) < 10) {
+    if (d.getDate() < 10) {
+      todayDate = d.getFullYear() + "-0" + (d.getMonth() + 1) + "-0" + d.getDate()
+    } else {
+      todayDate = d.getFullYear() + "-0" + (d.getMonth() + 1) + "-" + d.getDate()
+      //console.log("test month")
+    }
+  } else if (d.getDate() < 10) {
+    todayDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-0" + d.getDate()
+    //console.log("test date")
+  } else {
+    todayDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate()
+  }
+  return todayDate
+}
+
+console.log(getTodayDate(d))
+
 class Checkbox extends React.Component{
   render(){
     return(
@@ -90,7 +121,8 @@ class InvoiceForm extends React.Component {
       child:false,
       isPresta2:false,
       mouv:false,
-      registred:false,
+      registred:true,
+      date:getTodayDate(d),
       billName:'',
       childName:'',
       adress:'',
@@ -119,12 +151,19 @@ class InvoiceForm extends React.Component {
     }
     handleSelectedPatient = (event)=>{
       
-      console.log(event)
-      // this.setState({billname:Patientlist[id].parentsName})
-      // this.setState({childName:Patientlist[id].childFirstName})
-      // this.setState({adress:Patientlist[id].adress})
-      // this.setState({postCode:Patientlist[id].postCode})
-      // this.setState({city:Patientlist[id].city})
+      const name = event.target.name
+      this.setState({[name]:event.target.value})
+      const index = document.getElementById('billName').selectedIndex
+      if (Patientlist[index-1].childFirstName){
+          this.setState({child:true})
+      }
+      else{
+        this.setState({child:false})
+      }
+      this.setState({childName:Patientlist[index-1].childFirstName})
+      this.setState({adress:Patientlist[index-1].adress})
+      this.setState({postCode:Patientlist[index-1].postCode})
+      this.setState({city:Patientlist[index-1].city})
       
     }
   
@@ -139,10 +178,11 @@ class InvoiceForm extends React.Component {
           <Checkbox label='Seconde prestation' name='isPresta2' checked={this.state.isPresta2} onChange={this.handleCheck}/>
           <Checkbox label='Déplacements' name='mouv' checked={this.state.mouv} onChange={this.handleCheck}/>
         </div>
-          <input type="date" id="date" className='medium-input centered-block'></input>
+          <input type="date" id="date" name='date' className='medium-input center-text centered-block' value={this.state.date} onChange={this.handleChange}></input>
           <Switch label={this.state.org?'Organisme':'Personne'} name='registred' checked={this.state.registred} onChange={this.handleCheck}>{this.state.org?'Organisme':'Patient'} {this.state.registred?'enregistré':'non-enregistré'}</Switch>
           {this.state.registred?
-          <select className='select-patient-input centered-block' placeholder='Selectionner le nom' name='billName' onChange={this.handleSelectedPatient}>
+          <select className='select-patient-input centered-block' defaultValue='default' name='billName' id="billName" onChange={this.handleSelectedPatient}>
+            <option value='default' disabled>Selectionner {this.state.org?"l'organisme":"le patient"}</option>
             {patientSelect}
           </select>
           :<input id="billName"
