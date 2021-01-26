@@ -82,7 +82,6 @@ function getTodayDate (d){
   return todayDate
 }
 
-console.log(getTodayDate(d))
 
 class Checkbox extends React.Component{
   render(){
@@ -97,12 +96,25 @@ class Checkbox extends React.Component{
   }
 }
 
-class Switch extends React.Component{
+class BlueSwitch extends React.Component{
   render(){
     return(
       <div className="pretty p-switch p-fill">
         <input type="checkbox"  name={this.props.name} id={this.props.name} checked={this.props.checked} onChange={this.props.onChange}/>
         <div className="state p-primary">
+            <label>{this.props.children}</label>
+        </div>
+      </div>
+    )
+  }
+}
+
+class RedSwitch extends React.Component{
+  render(){
+    return(
+      <div className="pretty p-switch p-fill">
+        <input type="checkbox"  name={this.props.name} id={this.props.name} checked={this.props.checked} onChange={this.props.onChange}/>
+        <div className="state p-danger">
             <label>{this.props.children}</label>
         </div>
       </div>
@@ -136,10 +148,14 @@ class InvoiceForm extends React.Component {
       presta2:"",
       nbPresta2:0,
       mouvePrice:'',
+      acquit:false,
+      path:"",
 
       };
       this.handleChange = this.handleChange.bind(this)
       this.handleChange = this.handleChange.bind(this)
+      this.handlePath = this.handlePath.bind(this)
+      this.fileInput = React.createRef();
     }
     handleChange = (event) => {
       const name = event.target.name
@@ -166,6 +182,13 @@ class InvoiceForm extends React.Component {
       this.setState({city:Patientlist[index-1].city})
       
     }
+    handlePath = (event) => {
+      event.preventDefault();
+      const filesPath = this.fileInput.current.files
+      // console.log(filesPath[0].path)
+      this.setState({path:filesPath[0].path})
+
+    }
   
   
     render() {
@@ -179,7 +202,7 @@ class InvoiceForm extends React.Component {
           <Checkbox label='Déplacements' name='mouv' checked={this.state.mouv} onChange={this.handleCheck}/>
         </div>
           <input type="date" id="date" name='date' className='medium-input center-text centered-block' value={this.state.date} onChange={this.handleChange}></input>
-          <Switch label={this.state.org?'Organisme':'Personne'} name='registred' checked={this.state.registred} onChange={this.handleCheck}>{this.state.org?'Organisme':'Patient'} {this.state.registred?'enregistré':'non-enregistré'}</Switch>
+          <BlueSwitch label={this.state.org?'Organisme':'Personne'} name='registred' checked={this.state.registred} onChange={this.handleCheck}>{this.state.org?'Organisme':'Patient'} {this.state.registred?'enregistré':'non-enregistré'}</BlueSwitch>
           {this.state.registred?
           <select className='select-patient-input centered-block' defaultValue='default' name='billName' id="billName" onChange={this.handleSelectedPatient}>
             <option value='default' disabled>Selectionner {this.state.org?"l'organisme":"le patient"}</option>
@@ -221,7 +244,7 @@ class InvoiceForm extends React.Component {
                  value={this.state.object}
                  onChange={this.handleChange}
                  className='medium-input centered-block'/>  
-          <label className='centered-block'>Numero de {this.state.quot ? 'bilan' : 'facture'}</label>
+          <label className='centered-block'>Numero de {this.state.quot ? 'Devis' : 'facture'}</label>
           <div>
             <input id="invoiceN1"
                     name="invoiceN1"
@@ -270,8 +293,6 @@ class InvoiceForm extends React.Component {
         </div>
           :<></>
           }
-          
-          <>
           {
            this.state.mouv
            ?<input id="mouvePrice"
@@ -285,7 +306,14 @@ class InvoiceForm extends React.Component {
            className='medium-input centered-block'/>
            :<></>
           }
-          </>
+          {!this.state.quot
+          ?<div className='acquit-switch'>
+            <RedSwitch label="Acquité" name='acquit'  checked={this.state.acquit} onChange={this.handleCheck}>Acquitée</RedSwitch>
+          </div>
+          :<></>
+          }
+          <input id="select-folder" directory="" webkitdirectory="" type="file" name='path' onChange={this.handlePath} ref={this.fileInput}/>
+          <button type="button" className='centered-block gen-button'>Générer</button>
           
         {JSON.stringify(this.state )}
       </>
