@@ -1,58 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'pretty-checkbox/src/pretty-checkbox.scss'
 import './assets/css/style.css'
+import Data from './../data/presta.json'
 
-var PrestationList= [{
-  "prestation": "Bilan d'ergothérapie",
-  "price": 180,
-  "id":0,
-}, {
-  "prestation": "Séance d'ergothérapie à domicile",
-  "price": 55,
-  "id":1,
-}, {
-  "prestation": "Séance d'ergothérapie en cabinet",
-  "price": 45,
-  "id":2,
-}]
-
-var Patientlist = [{
-  "parentsName": "Sidi Atman",
-  "childFirstName": "Anthony",
-  "adress": "3438 boulevard des Horizons",
-  "postCode": "06220",
-  "city": "VALLAURIS",
-  "id":0,
-}, {
-  "parentsName": "Barelier",
-  "childFirstName": "Paolo",
-  "adress": "",
-  "postCode": "",
-  "city": "",
-  "id":1,
-}, {
-  "parentsName": "Cauneau",
-  "childFirstName": "Gaspar",
-  "adress": "",
-  "postCode": "06220",
-  "city": "GOLFE JUAN",
-  "id":2,
-}, {
-  "parentsName": "De Soria",
-  "childFirstName": "Enzo",
-  "adress": "Villa Montolivet 28 avenue Jean Mermoz",
-  "postCode": "06110",
-  "city": "LE CANNET",
-  "id":3,
-},
-{
-  "parentsName": "Saffioti",
-  "childFirstName": "",
-  "adress": "604 avenue georges pompidou",
-  "postCode": "06110",
-  "city": "LE CANNET",
-  "id":4,
-}]
+  let Patientlist = Data.Patientlist
+  let PrestationList = Data.PrestationList
 
 const prestations = PrestationList.map((PrestationList) =>
   <option key={PrestationList.id}>{PrestationList.prestation}</option>
@@ -155,6 +107,7 @@ class InvoiceForm extends React.Component {
       this.handleChange = this.handleChange.bind(this)
       this.handleChange = this.handleChange.bind(this)
       this.handlePath = this.handlePath.bind(this)
+      this.handleSubmit = this.handleSubmit.bind(this)
       this.fileInput = React.createRef();
     }
     handleChange = (event) => {
@@ -188,6 +141,9 @@ class InvoiceForm extends React.Component {
       // console.log(filesPath[0].path)
       this.setState({path:filesPath[0].path})
 
+    }
+    handleSubmit = (event) =>{
+      console.log(this.state)
     }
   
   
@@ -306,16 +262,17 @@ class InvoiceForm extends React.Component {
            className='medium-input centered-block'/>
            :<></>
           }
+          <label className="medium-input centered-block" style={{cursor:'pointer'}} htmlFor="path">{this.state.path?this.state.path:"Selctionner un dossier"}</label>
+          <input id="path" className='medium-input centered-block input-folder' style={{display:'none'}} directory="" webkitdirectory="" type="file" name='path' onChange={this.handlePath} ref={this.fileInput}/>
           {!this.state.quot
           ?<div className='acquit-switch'>
             <RedSwitch label="Acquité" name='acquit'  checked={this.state.acquit} onChange={this.handleCheck}>Acquitée</RedSwitch>
           </div>
           :<></>
           }
-          <input id="select-folder" directory="" webkitdirectory="" type="file" name='path' onChange={this.handlePath} ref={this.fileInput}/>
-          <button type="button" className='centered-block gen-button'>Générer</button>
+          <button type="button" style={{cursor:'pointer'}} className='centered-block gen-button' onClick={this.handleSubmit}>Générer</button>
           
-        {JSON.stringify(this.state )}
+        {console.log(this.state)}
       </>
       );
     }
