@@ -2,7 +2,7 @@ const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-const { default: installExtension, REACT_DEVELOPER_TOOLS,VUEJS_DEVTOOLS,REDUX_DEVTOOLS } = require('electron-devtools-installer');
+const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
 
 const path = require("path");
 const isDev = require("electron-is-dev");
@@ -22,7 +22,7 @@ function createWindow() {
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
   mainWindow.on("closed", () => (mainWindow = null));
-  [REACT_DEVELOPER_TOOLS, VUEJS_DEVTOOLS,REDUX_DEVTOOLS].forEach(extension => {
+  [REACT_DEVELOPER_TOOLS].forEach(extension => {
     installExtension(extension)
         .then((name) => console.log(`Added Extension: ${name}`))
         .catch((err) => console.log('An error occurred: ', err));

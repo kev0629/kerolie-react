@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import 'pretty-checkbox/src/pretty-checkbox.scss'
 import './assets/css/style.css'
 import Data from './../data/presta.json'
