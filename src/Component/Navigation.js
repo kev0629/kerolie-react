@@ -1,22 +1,22 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import './assets/css/Navigation.css'
 
 function Navigation(){
     return(
-        <ul>
-            <Link to='/'>
+        <ul className="header">
+            <NavLink to='/' exact activeClassName="selected" >
             <li>Facturation</li>
-            </Link>
-            <Link to='/Prestation'>
+            </NavLink>
+            <NavLink to='/Prestation' activeClassName="selected">
             <li>Prestation</li>
-            </Link>
-            <Link to='/Clients'>
+            </NavLink>
+            <NavLink to='/Clients/personnes' activeClassName="selected">
             <li>Clients</li>
-            </Link>
-            <Link to='/Config'>
+            </NavLink>
+            <NavLink to='/Config' activeClassName="selected">
             <li>Réglages</li>
-            </Link>
+            </NavLink>
         </ul>
     )
 }

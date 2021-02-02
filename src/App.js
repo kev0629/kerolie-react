@@ -4,18 +4,20 @@ import Facturaton from './Component/Facturation'
 import Prestation from './Component/Prestation'
 import Config from './Component/Config'
 import Navigation from './Component/Navigation'
-import {BrowserRouter as Router, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./Component/assets/css/style.css"
 
 function App() {
   return (
     <div className="App">
       <Router>
-      <Navigation/>
-        <Route path="/" exact component={Facturaton}/>
-        <Route path="/Prestation" exact component={Prestation}/>
-        <Route path="/Clients" exact component={Clients}/>
-        <Route path="/Config" exact component={Config}/>
+        <Navigation/>
+        <Switch>
+          <Route path="/" exact  component={Facturaton}/>
+          <Route path="/Prestation"  component={Prestation}/>
+          <Route path="/Clients"  component={Clients}/>
+          <Route path="/Config"  component={Config}/>
+        </Switch>
       </Router>
     </div>
   );
