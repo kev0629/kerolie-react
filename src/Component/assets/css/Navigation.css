@@ -25,11 +25,20 @@ li{
 .selected{
   text-decoration: underline white;
 }
+.selected-blue{
+  text-decoration: underline #1d8cf8;
+}
 a {
     text-decoration: none;
   }
 li.client-route{
-    color: #3358f4;
+    color: #1d8cf8;
     display: inline;
     padding: 10px;
+}
+a.client-route{
+  color: #1d8cf8;
+  display: inline;
+  padding: 10px;
+
 }

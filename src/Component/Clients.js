@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Switch, useParams,
+import {BrowserRouter as Route, NavLink, Switch,
   useRouteMatch } from 'react-router-dom';
 import Data from './../data/presta.json'
 import './assets/css/style.css'
@@ -71,30 +71,17 @@ function OrganismeTabel(){
   )
 }
 
-function Topic() {
-  // The <Route> that rendered this component has a
-  // path of `/topics/:topicId`. The `:topicId` portion
-  // of the URL indicates a placeholder that we can
-  // get from `useParams()`.
-  let { topicId } = useParams();
-
-  return (
-    <div>
-      <h3>{topicId}</h3>
-    </div>
-  );
-}
 
 function Clients(){
   let { url } = useRouteMatch();
     return(
       <div className="contener">
       <ul>
-        <li>
-          <Link to={`${url}/personnes`}>Personnes</Link>
+        <li className='client-route'>
+          <NavLink to={`${url}/personnes`} activeClassName="selected-blue" className='client-route'>Personnes</NavLink>
         </li>
-        <li>
-          <Link to={`${url}/organismes`}>Organismes</Link>
+        <li className='client-route'>
+          <NavLink to={`${url}/organismes`} activeClassName="selected-blue" >Organismes</NavLink>
         </li>
       </ul>
 

@@ -1,22 +1,8 @@
 import React from 'react';
-import { useTable,useRowSelect } from 'react-table'
+import { useTable } from 'react-table'
+import { BsTrash,BsPencil } from "react-icons/bs";
 
-const IndeterminateCheckbox = React.forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef()
-    const resolvedRef = ref || defaultRef
 
-    React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate
-    }, [resolvedRef, indeterminate])
-
-    return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    )
-  }
-)
 
 function Table({ columns, data }) {
   // Use the state and functions returned from useTable to build your UI
@@ -26,83 +12,50 @@ function Table({ columns, data }) {
     headerGroups,
     rows,
     prepareRow,
-    selectedFlatRows,
-    state: { selectedRowIds },
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useRowSelect,
-    hooks => {
-      hooks.visibleColumns.push(columns => [
-        // Let's make a column for selection
-        {
-          id: 'selection',
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-            </div>
-          ),
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
-          ),
-        },
-        ...columns,
-      ])
-    }
-  )
+  } = useTable({
+    columns,
+    data,
+  })
 
   // Render the UI for your table
   return (
-    <>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
+    <table {...getTableProps()}>
+    <thead>
+      {headerGroups.map(headerGroup => (
+        <tr {...headerGroup.getHeaderGroupProps()}>
+          {headerGroup.headers.map(column => (
+            <th {...column.getHeaderProps()} >
+              {column.render("Header")}
+            </th>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.slice(0, 10).map((row, i) => {
-            prepareRow(row)
-            return (
-              <tr className="table-body" {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-      <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-      <pre>
-        <code>
-          {JSON.stringify(
-            {
-              selectedRowIds: selectedRowIds,
-              'selectedFlatRows[].original': selectedFlatRows.map(
-                d => d.original
-              ),
-            },
-            null,
-            2
-          )}
-        </code>
-      </pre>
-    </>
+          <th>Modifier</th>
+          <th>Supprimer</th>
+        </tr>
+      ))}
+    </thead>
+    <tbody {...getTableBodyProps()}>
+      {rows.map((row, i) => {
+        prepareRow(row);
+        return (
+          <tr {...row.getRowProps()} >
+            {row.cells.map((cell, j) => {
+              return (
+                <td
+                  rowSpan={cell.rowSpan}
+                  {...cell.getCellProps()}
+                >
+                  {cell.render("Cell")}
+                </td>
+              );
+            })}
+            <td onClick={() => console.log(row.original)}><BsPencil/></td>
+            <td onClick={() => console.log(row.original)}><BsTrash/></td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
   )
 }
-
 
   export default Table;
