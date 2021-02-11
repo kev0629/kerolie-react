@@ -19,6 +19,7 @@
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
     "react-table": "^7.6.3",
+    "reactjs-popup": "^2.0.4",
     "update-electron-app": "^1.2.0"
   },
   "devDependencies": {
