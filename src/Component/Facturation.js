@@ -1,9 +1,10 @@
 import React from 'react';
-import 'pretty-checkbox/src/pretty-checkbox.scss'
 import './assets/css/style.css'
 import './assets/css/modal.css'
 import Data from './../data/presta.json'
-import Popup from 'reactjs-popup';
+import PopupExample from './Popup'
+import {Checkbox, BlueSwitch, RedSwitch} from './checkboxes'
+
 
   let Patientlist = Data.Patientlist
   let PrestationList = Data.PrestationList
@@ -36,75 +37,9 @@ function getTodayDate (d){
   return todayDate
 }
 
-const PopupExample = () => (
-<Popup
-    trigger={<button className="button"> Open Modal </button>}
-    modal
-    nested
-  >
-    {close => (
-      <div className="modal">
-        <button className="close" onClick={close}>
-          &times;
-        </button>
-        {/* <div className="header"> Modal Title </div> */}
-        <div className="content">
-          Le fichier à été générer !
-        </div>
-        <div className="actions">
-          <button
-            className="button"
-            onClick={() => {
-              console.log('modal closed ');
-              close();
-            }}
-          >
-            close modal
-          </button>
-        </div>
-      </div>
-    )}
-  </Popup>
-);
 
-class Checkbox extends React.Component{
-  render(){
-    return(
-      <div className="pretty p-pulse p-default p-curve">
-        <input type="checkbox"  name={this.props.name} id={this.props.name} checked={this.props.checked} onChange={this.props.onChange}/>
-        <div className="state p-primary">
-            <label>{this.props.label}</label>
-        </div>
-      </div>
-    )
-  }
-}
 
-class BlueSwitch extends React.Component{
-  render(){
-    return(
-      <div className="pretty p-switch p-fill">
-        <input type="checkbox"  name={this.props.name} id={this.props.name} checked={this.props.checked} onChange={this.props.onChange}/>
-        <div className="state p-primary">
-            <label>{this.props.children}</label>
-        </div>
-      </div>
-    )
-  }
-}
 
-class RedSwitch extends React.Component{
-  render(){
-    return(
-      <div className="pretty p-switch p-fill">
-        <input type="checkbox"  name={this.props.name} id={this.props.name} checked={this.props.checked} onChange={this.props.onChange}/>
-        <div className="state p-danger">
-            <label>{this.props.children}</label>
-        </div>
-      </div>
-    )
-  }
-}
 
 
 class InvoiceForm extends React.Component {
@@ -303,7 +238,7 @@ class InvoiceForm extends React.Component {
           :<></>
           }
           <button type="button" style={{cursor:'pointer'}} className='centered-block gen-button' onClick={this.handleSubmit}>Générer</button>
-          <PopupExample/>
+          <PopupExample>Générer</PopupExample>
           
         {console.log(this.state)}
       </>
